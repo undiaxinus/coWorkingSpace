@@ -1,0 +1,192 @@
+
+<div class="font-coiny">
+  <div class=" pr-20 bg-white max-md:pr-5">
+      <div class="flex gap-5 max-md:flex-col">
+        <aside class="flex flex-col w-[15%] max-md:w-full h-screen max-md:ml-0 max-md:mb-10">
+          <div class="flex grow flex-col gap-2.5 items-center h-screen px-6  w-52 fixed text-sm text-black bg-amber-100 shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:px-5 max-md:mt-10">
+            <div class="flex flex-col self-stretch mt-3 w-[149px]">
+              <div class="flex flex-col justify-center self-center max-w-full text-center w-[100px]">
+                <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/1a429da303fe6a05b6415bf33fba621f5c616f02db544edbe17d75159051d601?placeholderIfAbsent=true&apiKey=f814d152556d45aeb58d44f206a3cbd4" alt="Coffee shop logo" class="object-contain w-full aspect-square rounded-[1000px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]" />
+                <div class="mt-3">COFFEE ME?</div>
+              </div>
+              <nav class="flex flex-col mt-12 w-full max-md:mt-10">
+                <ul class="flex flex-col items-start w-full ">
+                  <li class="flex gap-2 items-center hover:px-5 hover:rounded-lg hover:w-56 hover:h-10 hover:bg-white">
+                    <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/2710d443e902d7a5c9795288b1f2bdfe3c7b9bd222c48c28d3b5b984d3883ebd?placeholderIfAbsent=true&apiKey=f814d152556d45aeb58d44f206a3cbd4" alt="" class="object-contain shrink-0 self-stretch my-auto w-5 aspect-square" />
+                    <a href="#products" class="mt-2">PRODUCTS</a>
+                  </li>
+                  <li class="flex gap-2 items-center self-stretch mt-3 w-full hover:px-5 hover:rounded-lg hover:w-56 hover:h-10 hover:bg-white">
+                    <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/d27bed5d77fd91560cbb67d37e3994113266b623e89e9ce82ec877f2d4e69eca?placeholderIfAbsent=true&apiKey=f814d152556d45aeb58d44f206a3cbd4" alt="" class="object-contain shrink-0 self-stretch my-auto w-5 aspect-square" />
+                    <a href="#order-history" class="mt-2">ORDER HISTORY</a>
+                  </li>
+                  <li class="flex gap-2 items-center self-stretch mt-3 w-full hover:px-5 hover:rounded-lg hover:w-56 hover:h-10 hover:bg-white">
+                    <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/561d2188c27e359efde4f1201f2699030c86d3c9af2b433782ab228a64838feb?placeholderIfAbsent=true&apiKey=f814d152556d45aeb58d44f206a3cbd4" alt="" class="object-contain shrink-0 self-stretch my-auto w-5 aspect-square" />
+                    <a href="#extend-hours" class="mt-2">EXTEND HOURS</a>
+                  </li>
+                  <li class="flex gap-2 items-center mt-3 hover:px-5 hover:rounded-lg hover:w-56 hover:h-10 hover:bg-white">
+                    <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/4812d72ff4abb84c86f4bbe1d323fb235f4935ef1c05c76e1b71fcf9dbd6265a?placeholderIfAbsent=true&apiKey=f814d152556d45aeb58d44f206a3cbd4" alt="" class="object-contain shrink-0 self-stretch my-auto w-5 aspect-square" />
+                    <a href="#" (click)="showAddProductPopup()" class="mt-2">ADD PRODUCT</a>
+                  </li>
+                  <li class="flex gap-2 items-center mt-3 hover:px-5 hover:rounded-lg hover:w-56 hover:h-10 hover:bg-white">
+                    <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/6792eeb3d2d2785c0738c048467187075e0df468b4387be35675c4a499dc5f19?placeholderIfAbsent=true&apiKey=f814d152556d45aeb58d44f206a3cbd4" alt="" class="object-contain shrink-0 self-stretch my-auto w-5 aspect-square" />
+                    <a href="#dashboard" class="mt-2">DASHBOARD</a>
+                  </li>
+                </ul>
+              </nav>
+              <div class="flex fixed gap-2 items-center self-start bottom-10 hover:px-5 hover:rounded-lg hover:w-56 hover:h-10 hover:bg-white">
+                <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/c9b22ab5efaa7d90aebe27d25800a6c890bfd39ff6a25f96700ee03a01b54d89?placeholderIfAbsent=true&apiKey=f814d152556d45aeb58d44f206a3cbd4" alt="" class="object-contain shrink-0 self-stretch my-auto w-5 aspect-square" />
+                <button class="self-stretch my-auto mt-2">LOGOUT</button>
+              </div>
+            </div>
+          </div>
+        </aside>
+        
+        
+        <main class="flex flex-col ml-5 w-[85%] max-md:ml-0 max-md:w-full">
+          <section class="flex flex-col mt-2.5 w-full max-md:mt-10 max-md:max-w-full">
+            
+            <div *ngIf="isAddProductVisible" class="popup-overlay fixed z-50 place-self-center" (click)="closeAddProductPopup()">
+              <div class="popup-content top-5" (click)="$event.stopPropagation()">
+                <button class="close-button" (click)="closeAddProductPopup()">X</button>
+                <app-add-product></app-add-product>
+              </div>
+            </div>
+
+            <div class="w-full h-72 relative">
+              <div class="w-full h-60 left-0 top-[50px] absolute bg-orange-200 rounded-lg shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
+              <div class="h-72 left-[22px] -top-12 absolute justify-center items-center gap-8 inline-flex">
+                <div *ngFor="let order of orders" class="w-52 h-72 relative ">
+                  <img class="w-48 h-56 left-0 top-[50px]  absolute drop-shadow-[5px_4px_4px_rgba(0,0,0,0.50)]" src="assets/G4.png" />
+                  <button name="delete" (mousedown)="onMouseDown($event, order.clientID)" (mouseup)="onMouseUp($event, order.clientID)" (dragstart)="onDragStart($event, order.clientID)" (dragend)="onDragEnd($event)" class="absolute top-0 left-6" draggable="true">
+                    <img class="w-20 h-20 drop-shadow-lg" src="assets/Paperclip.png" alt="Delete Icon"/>
+                  </button>
+                  <button name="view" class="text-start">
+                    <div class="w-40 left-[17px] top-[100px] absolute text-white text-xs font-normal font-['Coiny']">
+                        <p class="text-base">Client ID: {{ order.clientID }}</p><br>
+                        <p>Pname: {{ order.product_name }} </p>
+                        <p>Qty: {{ order.qty }} </p>
+                        <p>Total Pay: Php {{ order.total_pay }}</p>
+                        <p>Remaining Time:</p>
+                        <p class="text-xl text-center">{{ order.hours }}</p> 
+                      </div> 
+                  </button>
+                </div>  
+                </div>
+              </div>
+            </div>
+            
+            <!-- Category Buttons -->
+            <div class="flex flex-wrap gap-10 mt-10 max-w-full text-2xl text-black whitespace-nowrap w-[744px] z-10">
+              <button (click)="onComponentSelect('Drinks')" class="grow px-16 py-4 bg-orange-200 rounded-xl w-fit max-md:px-5 hover:bg-orange-500 hover:text-white shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
+                DRINKS
+              </button>
+              <button (click)="onComponentSelect('Meal')" class="grow px-16 py-4 bg-orange-200 rounded-xl w-fit max-md:px-5 hover:bg-orange-500 hover:text-white shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
+                MEAL
+              </button>
+            </div>
+
+<!-- Products Display -->
+<div class="mt-8 w-full max-md:mr-0.5 max-md:max-w-full z-10">
+  <div class="grid grid-cols-5 gap-5 max-md:grid-cols-1">
+    <article *ngFor="let product of products" class="flex flex-col max-md:w-full">
+      <div class="flex grow gap-2.5 justify-center items-start px-0.5 pt-0.5 pb-5 w-full bg-orange-200 rounded-xl min-h-[335px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:mt-10">
+        <div class="flex flex-col w-[214px]">
+          <div class="flex flex-col justify-center p-2.5 w-full">
+            <img loading="lazy" [src]="product.imageUrl" class="w-full rounded-xl shadow-[0px_4px_4px_rgba(0,0,0,0.25)]" />
+          </div>
+          <div class="flex flex-col justify-center self-center max-w-full w-[178px]">
+            <div class="flex flex-col w-full">
+              <h3 class="text-base text-center text-black">{{ product.productName }}</h3>
+              <div class="flex flex-col justify-center mt-2.5 w-full text-xs text-neutral-700">
+                <p>Price: Php {{ product.price }}</p>
+                <p class="mt-2.5">Extended hrs: {{ product.extendedHrs }}</p>
+                <p class="mt-2.5">Product Details: {{ product.productDetails }}</p>
+                <p class="mt-2.5">uuid: {{ product.uuid }}</p>
+              </div>
+            </div>
+            <button (click)="showBuyNowPopup(product)" class="gap-2.5 self-center px-5 py-1 mt-2.5 max-w-full text-base text-white rounded-md bg-zinc-500 min-h-[24px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] w-[140px] max-md:px-5">
+              Buy Me!
+            </button>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</div>
+
+<div *ngIf="isBuyNowVisible" class="popup-overlay fixed z-50 place-self-center" (click)="closeBuyNowPopup()">
+  <div class="popup-content top-5" (click)="$event.stopPropagation()">
+    <button class="close-button" (click)="closeBuyNowPopup()">X</button>
+    <main class="flex relative flex-col mx-auto min-h-screen justify-center items-center gap-2.5 w-[750px] px-20 py-12 text-base bg-orange-200 rounded-3xl shadow-[5px_5px_4px_rgba(0,0,0,0.5)] max-md:px-5 font-coiny">
+      <section class="flex flex-col justify-center self-stretch my-auto min-w-[240px] w-[593px] max-md:max-w-full">
+        <h1 class="text-3xl text-center text-black max-md:max-w-full">EXTENDED HOURS</h1>
+        <form (ngSubmit)="submitForm()" class="flex flex-col mt-4 w-full">
+          <div class="flex flex-col mb-4 w-full bg-white rounded-md shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:max-w-full">
+            <div class="flex flex-wrap items-center w-full max-md:max-w-full">
+              <label for="productName" class="gap-2.5 self-stretch px-7 py-5 my-auto text-black bg-orange-300 rounded-md rounded-r-none border-l border-black min-h-[58px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] w-[215px] max-md:px-5">
+                CLIENT ID
+              </label>
+              <input required type="text" id="clientID" name="clientID" [(ngModel)]="clientID" placeholder="Enter client ID" class="w-[350px] h-[60px] ml-6 self-stretch my-auto text-neutral-400" aria-label="Enter client id">
+            </div>
+          </div>
+    
+          <div class="flex flex-col mb-4 w-full bg-white rounded-md shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:max-w-full">
+            <div class="flex flex-wrap gap-6 items-center w-full max-md:max-w-full">
+              <label for="price" class="gap-2.5 self-stretch px-7 py-5 my-auto text-black whitespace-nowrap bg-orange-300 rounded-md rounded-r-none border-l border-black min-h-[58px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] w-[215px] max-md:px-5">
+                PRODUCT NAME
+              </label>
+              <input required type="text" id="productName" name="productName" [(ngModel)]="productName" placeholder="Enter product name" class="w-[350px] h-[60px] self-stretch my-auto text-neutral-400" aria-label="Enter product name" readonly>
+            </div>
+          </div>
+    
+          <div class="flex flex-col mb-4 w-full bg-white rounded-md shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:max-w-full">
+            <div class="flex flex-wrap gap-6 items-center w-full max-md:max-w-full">
+              <label for="component" class="gap-2.5 self-stretch px-7 py-5 my-auto text-black whitespace-nowrap bg-orange-300 rounded-md rounded-r-none border-l border-black min-h-[58px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] w-[215px] max-md:px-5">
+                QUANTITY
+              </label>
+              <select required id="quantity" name="quantity" [(ngModel)]="quantity" (change)="calculateTotalPrice()" class="w-[350px] h-[60px] self-stretch my-auto text-neutral-400" aria-label="Enter quantity">
+                <option hidden></option>
+                <option *ngFor="let qty of [1,2,3,4,5,6,7,8,9,10]">{{ qty }}</option>
+              </select>
+              
+            </div>
+          </div>
+          <div class="flex flex-col mb-4 w-full bg-white rounded-md shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:max-w-full">
+              <div class="flex flex-wrap gap-6 items-center w-full max-md:max-w-full">
+                <label for="price" class="gap-2.5 self-stretch px-7 py-5 my-auto text-black whitespace-nowrap bg-orange-300 rounded-md rounded-r-none border-l border-black min-h-[58px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] w-[215px] max-md:px-5">
+                  EXTENDED HOURS
+                </label>
+                <input type="text" id="totalHours" name="totalHours" [value]="totalHours" readonly placeholder="Total Hours" class="w-[350px] h-[60px] self-stretch my-auto text-neutral-400" aria-label="Total hours">
+              </div>
+            </div>
+            <div class="flex flex-col mb-4 w-full bg-white rounded-md shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:max-w-full">
+              <div class="flex flex-wrap gap-6 items-center w-full max-md:max-w-full">
+                <label for="price" class="gap-2.5 self-stretch px-7 py-5 my-auto text-black whitespace-nowrap bg-orange-300 rounded-md rounded-r-none border-l border-black min-h-[58px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] w-[215px] max-md:px-5">
+                  TOTAL PRICE
+                </label>
+                <input required type="text" id="totalPrice" name="totalPrice" [(ngModel)]="totalPrice" class="w-[350px] h-[60px] self-stretch my-auto text-neutral-400" aria-label="Total Price" readonly>
+   
+              </div>
+            </div>
+    
+          <div class="flex gap-10 justify-between items-start self-center mt-4 max-w-full text-white whitespace-nowrap w-[440px]">
+            <button type="button" (click)="onCancel()" class="gap-2.5 self-stretch p-2.5 bg-red-700 hover:bg-red-800 rounded-xl min-h-[37px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] w-[155px]">
+              CANCEL
+            </button>
+            <button type="submit" class="gap-2.5 self-stretch px-12 py-2.5 bg-amber-700 hover:bg-amber-800 rounded-xl shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:px-5">
+              SAVE
+            </button>
+          </div>
+        </form>
+      </section>
+    </main>
+  </div>
+</div>
+
+            
+          </section>
+        </main>
+      </div>
+    </div>
+</div>
+ 
