@@ -67,7 +67,7 @@
                         <p>Qty: {{ order.qty }} </p>
                         <p>Total Pay: Php {{ order.total_pay }}</p>
                         <p>Remaining Time:</p>
-                        <p class="text-xl text-center">{{ order.hours }}</p> 
+                        <p class="text-xl text-center">{{ order.displayTime }}</p> 
                       </div> 
                   </button>
                 </div>  
@@ -101,7 +101,7 @@
                 <p>Price: Php {{ product.price }}</p>
                 <p class="mt-2.5">Extended hrs: {{ product.extendedHrs }}</p>
                 <p class="mt-2.5">Product Details: {{ product.productDetails }}</p>
-                <p class="mt-2.5">uuid: {{ product.uuid }}</p>
+                
               </div>
             </div>
             <button (click)="showBuyNowPopup(product)" class="gap-2.5 self-center px-5 py-1 mt-2.5 max-w-full text-base text-white rounded-md bg-zinc-500 min-h-[24px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] w-[140px] max-md:px-5">
@@ -169,10 +169,10 @@
               </div>
             </div>
     
-          <div class="flex gap-10 justify-between items-start self-center mt-4 max-w-full text-white whitespace-nowrap w-[440px]">
-            <button type="button" (click)="onCancel()" class="gap-2.5 self-stretch p-2.5 bg-red-700 hover:bg-red-800 rounded-xl min-h-[37px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] w-[155px]">
+          <div class="flex gap-10 justify-center items-center self-center mt-4 max-w-full text-white whitespace-nowrap w-[440px]">
+            <!--<button type="button" (click)="onCancel()" class="gap-2.5 self-stretch p-2.5 bg-red-700 hover:bg-red-800 rounded-xl min-h-[37px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] w-[155px]">
               CANCEL
-            </button>
+            </button>-->
             <button type="submit" class="gap-2.5 self-stretch px-12 py-2.5 bg-amber-700 hover:bg-amber-800 rounded-xl shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:px-5">
               SAVE
             </button>

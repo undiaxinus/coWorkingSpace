@@ -183,6 +183,7 @@ export class SupabaseService {
       return [];
     }
   }
+  
 
   // Method to delete an order by ID
   async deleteOrder(orderId: number) {

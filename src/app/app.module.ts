@@ -7,6 +7,7 @@ import { CoffeeMenuComponent } from './coffee-menu/coffee-menu.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TimerComponent } from './timer/timer.component';
+import { CountdownModule } from 'ngx-countdown';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { TimerComponent } from './timer/timer.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    CountdownModule,
     FormsModule 
   ],
   providers: [
