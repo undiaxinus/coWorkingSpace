@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
 import { SupabaseService } from '../supabase/supabase.service';
 import Swal from 'sweetalert2';
@@ -28,7 +29,7 @@ export class CoffeeMenuComponent implements OnInit, OnDestroy {
   isError: boolean = false;
   private countdownSubscriptions: Subscription[] = [];
 
-  constructor(private router: Router, private supabaseService: SupabaseService) {}
+  constructor(private router: Router, private supabaseService: SupabaseService, @Inject(PLATFORM_ID) private platformId: Object) {}
 
   ngOnInit() {
     this.loadOrders();
@@ -40,40 +41,63 @@ export class CoffeeMenuComponent implements OnInit, OnDestroy {
   }
 
   async loadOrders() {
-    this.orders = await this.supabaseService.fetchOrder();
-    this.startCountdown();
+    try {
+      // Fetch all orders from the Supabase service
+      const allOrders = await this.supabaseService.fetchOrder();
+      
+      // Update the orders list
+      this.orders = allOrders;
+
+      // Start the countdown (if applicable)
+      this.startCountdown();
+    } catch (error) {
+      console.error('Error loading orders:', error);
+      // Handle error, e.g., show a notification or set an error state
+    }
   }
 
   startCountdown() {
-    this.orders.forEach((order) => {
-      const [hours, minutes] = order.hours.split(':').map(Number);
-      const totalMinutes = (hours * 60) + minutes;
-      const endTime = new Date(Date.now() + totalMinutes * 60 * 1000);
+    if (isPlatformBrowser(this.platformId)) {
+      this.orders.forEach((order) => {
+        const savedEndTimeStr = localStorage.getItem(`order_${order.uuid}_endTime`);
+        let endTime: Date;
 
-      localStorage.setItem(`order_${order.id}_endTime`, endTime.toISOString());
+        if (savedEndTimeStr) {
+          // Retrieve existing end time and calculate remaining time
+          const savedEndTime = new Date(savedEndTimeStr);
+          const remainingTime = savedEndTime.getTime() - Date.now();
 
-      const countdownSubscription = interval(1000)
-        .pipe(
-          startWith(0)
-        )
-        .subscribe(() => {
-          const now = new Date();
-          const remainingTime = endTime.getTime() - now.getTime();
-          
-          if (remainingTime <= 0) {
-            order.displayTime = '00:00:00';
-             // Remove end time from localStorage if countdown is finished
-          localStorage.removeItem(`order_${order.id}_endTime`);
-          } else {
-            const remainingHours = Math.floor(remainingTime / (1000 * 60 * 60));
-            const remainingMinutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
-            const remainingSeconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
-            order.displayTime = `${this.formatTime(remainingHours)}:${this.formatTime(remainingMinutes)}:${this.formatTime(remainingSeconds)}`;
-          }
-        });
+          // Use the saved end time if it exists
+          endTime = savedEndTime;
+        } else {
+          // If no existing end time, calculate new end time
+          endTime = new Date(Date.now() + this.convertTimeToMinutes(order.hours) * 60 * 1000);
+        }
 
-      this.countdownSubscriptions.push(countdownSubscription);
-    });
+        // Save the updated end time to localStorage
+        localStorage.setItem(`order_${order.uuid}_endTime`, endTime.toISOString());
+
+        const countdownSubscription = interval(1000)
+          .pipe(startWith(0))
+          .subscribe(() => {
+            const now = new Date();
+            const remainingTime = endTime.getTime() - now.getTime();
+
+            if (remainingTime <= 0) {
+              order.displayTime = '00:00:00';
+              // Remove end time from localStorage if countdown is finished
+              localStorage.removeItem(`order_${order.clientID}_endTime`);
+            } else {
+              const remainingHours = Math.floor(remainingTime / (1000 * 60 * 60));
+              const remainingMinutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+              const remainingSeconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+              order.displayTime = `${this.formatTime(remainingHours)}:${this.formatTime(remainingMinutes)}:${this.formatTime(remainingSeconds)}`;
+            }
+          });
+
+        this.countdownSubscriptions.push(countdownSubscription);
+      });
+    }
   }
 
   formatTime(value: number): string {
@@ -106,7 +130,7 @@ export class CoffeeMenuComponent implements OnInit, OnDestroy {
 
   calculateTotalPrice() {
     const extendedHrsInMinutes = this.convertTimeToMinutes(this.extendedHrs);
-    this.totalPrice = (this.price * this.quantity) + (extendedHrsInMinutes * this.quantity);
+    this.totalPrice = (this.price * this.quantity);
     this.calculateTotalHours();
   }
 
@@ -203,10 +227,9 @@ export class CoffeeMenuComponent implements OnInit, OnDestroy {
         Swal.fire('Error!', 'Something went wrong. Please try again.', 'error');
       } else {
         Swal.fire('Deleted!', 'Your order has been deleted.', 'success').then(() => {
-          window.location.reload(); // Refresh the page
+          this.loadOrders(); // Refresh the orders list instead of reloading the page
         });
       }
     }
   }
-  
 }
