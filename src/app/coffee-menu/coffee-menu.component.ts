@@ -28,7 +28,11 @@ export class CoffeeMenuComponent implements OnInit, OnDestroy {
   productName: string = '';
   isError: boolean = false;
   private countdownSubscriptions: Subscription[] = [];
-
+  isReceiptVisible = false;
+   // Method to toggle the receipt popup visibility
+   toggleReceiptPopup(): void {
+    this.isReceiptVisible = !this.isReceiptVisible;
+  }
   constructor(private router: Router, private supabaseService: SupabaseService, @Inject(PLATFORM_ID) private platformId: Object) {}
 
   ngOnInit() {

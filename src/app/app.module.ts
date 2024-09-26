@@ -8,6 +8,7 @@ import { AddProductComponent } from './add-product/add-product.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TimerComponent } from './timer/timer.component';
 import { CountdownModule } from 'ngx-countdown';
+import { RecietComponent } from './reciet/reciet.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { CountdownModule } from 'ngx-countdown';
     CoffeeMenuComponent,
     AddProductComponent,
     TimerComponent,
+    RecietComponent,
   ],
   imports: [
     BrowserModule,

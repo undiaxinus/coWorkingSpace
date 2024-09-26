@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'map', component: CoffeeMenuComponent},
   { path: 'add-product', component: AddProductComponent},
   { path: 'timer', component: TimerComponent},
+  { path: 'timer', component: TimerComponent},
 ];
 
 @NgModule({
